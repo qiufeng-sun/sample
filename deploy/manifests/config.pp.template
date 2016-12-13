@@ -1,0 +1,45 @@
+class base {
+    $basedir = "$<path>"
+    $pkg_dir = "$<pkg_dir>"
+    $user = "$< user >"
+    $mod_ver = "$< version >"
+    $mod_name = "$< name >"
+    $tag = "$< tag >"
+
+    $job = regsubst($tag,'^.*_?job\.([a-zA-Z0-9\-]+)_?.*$','\1')
+    $cluster = regsubst($tag,'^.*_?cluster\.([a-zA-Z0-9\-]+)_?.*$','\1')
+    $log_base = "/home/work/log/${job}"
+
+
+    # app running control
+    $mod_start = "${basedir}/${job}"
+
+    $mod_proc_log = ["${log_base}/${job}.log"]
+    #$mod_run_log = "${log_base}/${job}.stdout.log"
+	$mod_run_log = "/dev/null"
+    $mod_err_log = "${log_base}/${job}.stderr.log" 
+    
+    $run_dir="${basedir}/"
+    $run_env= {"JAVA_OPTS" => ""}
+    $to_email = "sunxiguang@xiaomi.com"
+}
+
+class production-sd inherits base{                                     
+}
+
+class production-lg inherits base{
+}
+
+class production-hh inherits base{
+}
+
+class c3 inherits base{
+}
+
+class staging inherits base{
+}
+
+class onebox inherits base{
+}
+
+class config inherits $<env> {}
