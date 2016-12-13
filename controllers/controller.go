@@ -13,7 +13,7 @@ type TestController struct {
 
 func (this *TestController) Get() {
 	//
-	id := this.Ctx.Request.FormValue("uid")
+	id := this.GetString("uid")
 
 	this.Data["json"] = beego.BConfig.AppName + ":test -- uid=" + id
 	this.ServeJSON()
